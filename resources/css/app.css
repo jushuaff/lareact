@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.add-button {
+    display:block;
+    border-radius: 2px;
+    width: 26px;
+    padding: 5px;
+    svg {
+        width: 15px;
+        fill: white; }
+}

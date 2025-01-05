@@ -1,0 +1,42 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.25.9",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.26.3",
+    "@babel/register": "^7.25.9",
+    "@headlessui/react": "^2.0.0",
+    "@inertiajs/react": "^2.0.0",
+    "@tailwindcss/forms": "^0.5.3",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@vitejs/plugin-react": "^4.2.0",
+    "autoprefixer": "^10.4.12",
+    "axios": "^1.7.4",
+    "babel-jest": "^29.7.0",
+    "chai": "^5.1.2",
+    "concurrently": "^9.0.1",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "laravel-vite-plugin": "^1.0",
+    "mocha": "^11.0.1",
+    "postcss": "^8.4.31",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^3.2.1",
+    "util": "^0.12.5",
+    "vite": "^6.0"
+  },
+  "dependencies": {
+    "@inertiajs/core": "^2.0.0",
+    "react-router-dom": "^7.1.1",
+    "sweetalert2": "^11.15.10",
+    "ziggy-js": "^2.4.2"
+  }
+}
