@@ -127,7 +127,7 @@ function Dashboard({ user, musics }) {
                 <div className="mb-4">
                     <input
                         type="text"
-                        name="search"
+                        id="search"
                         placeholder="Search music by title or artist..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}

@@ -1,4 +1,5 @@
-import { Builder, By } from 'selenium-webdriver';
+import * as webdriver from 'selenium-webdriver';
+const { Builder, By, until } = webdriver;
 import { Options } from 'selenium-webdriver/firefox.js';
 import * as chai from 'chai';
 const { expect } = chai;
@@ -22,8 +23,16 @@ describe('Dashboard Component Test', function () {
 
   it('should verify the presence of a search input', async function () {
     await driver.get(url);
-    const searchInput = await driver.findElement(By.css('input[placeholder="Search music by title or artist..."]'));
-    expect(searchInput).to.exist;
+
+    try {
+      // Wait for the search input element to be present
+      const wait = webdriver.WebDriverWait(driver, 20); // 20 seconds timeout
+      const searchInput = wait.until(webdriver.ExpectedConditions.presenceOfElementLocated((By.id, 'search')));
+
+      expect(searchInput).to.exist;
+    } catch (error) {
+      throw new Error(`Test failed: The 'search' input element was not found within the timeout period.`);
+    }
   });
 
   after(async function () {
