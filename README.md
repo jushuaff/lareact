@@ -23,4 +23,6 @@
 * Make sure you have a firefox installed
 * Run php artisan test for backend, I've only tested two functions here in on MusicController
     * php artisan test tests/Feature/MusicControllerTest.php
-* Run npm run test:mocha for front end testing
+* Run the below first before doing front end testing
+    * php artisan serve --env=dusk.local
+    * php artisan dusk

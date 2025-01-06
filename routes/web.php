@@ -7,6 +7,13 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+if (app()->environment('local', 'testing')) {
+    Route::get('/dusk/login/{user}', function (\App\Models\User $user) {
+        auth()->login($user);
+        return redirect()->route('dashboard');
+    })->name('dusk.login');
+}
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
