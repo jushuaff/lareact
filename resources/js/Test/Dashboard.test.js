@@ -1,23 +1,32 @@
-import { render, screen } from '@testing-library/react';
-import { InertiaApp } from '@inertiajs/react';
-import { Dashboard } from '../Pages/Dashboard'; // Assuming Dashboard is a default export
-import '@testing-library/jest-dom';
-import React from 'react';
+import { Builder, By } from 'selenium-webdriver';
+import { Options } from 'selenium-webdriver/firefox.js';
+import * as chai from 'chai';
+const { expect } = chai;
 
-describe('Dashboard', () => {
-  test('checks if search input with name="search" is present', () => {
-    render(
-      <InertiaApp
-        initialPage={{ component: 'Dashboard' }}
-        resolveComponent={(name) => {
-          console.log('Component name:', name);
-          return name === 'Dashboard' ? Dashboard : null;
-        }}
-      />
-    );
+describe('Dashboard Component Test', function () {
+  let driver;
 
-    // Verifying if the search input is in the document
-    const searchInput = screen.getByRole('textbox', { name: /search/i });
-    expect(searchInput).toBeInTheDocument();
+  this.timeout(30000);
+
+  const options = new Options();
+  options.addArguments('--headless');
+
+  const url = 'http://localhost:8000/dashboard';
+
+  before(async function () {
+    driver = await new Builder()
+      .forBrowser('firefox')
+      .setFirefoxOptions(options)
+      .build();
+  });
+
+  it('should verify the presence of a search input', async function () {
+    await driver.get(url);
+    const searchInput = await driver.findElement(By.css('input[placeholder="Search music by title or artist..."]'));
+    expect(searchInput).to.exist;
+  });
+
+  after(async function () {
+    await driver.quit();
   });
 });

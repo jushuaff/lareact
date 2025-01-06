@@ -56,7 +56,13 @@ class MusicController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'artist' => 'required|string|max:255',
-            'music_link' => 'required|string'
+            'music_link' => [
+                'required',
+                'string',
+                'regex:/^https:\/\/(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)\/(watch\?v=|embed\/)[a-zA-Z0-9_-]{11}$/',
+            ],
+        ],[
+            'music_link.regex' => 'The music link must be a valid YouTube URL.',
         ]);
         
         $music = Music::create([
@@ -72,7 +78,13 @@ class MusicController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'artist' => 'required|string|max:255',
-            'music_link' => 'required|string'
+            'music_link' => [
+                'required',
+                'string', 
+                'regex:/^https:\/\/(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)\/(watch\?v=|embed\/)[a-zA-Z0-9_-]{11}$/',
+            ],
+        ],[
+            'music_link.regex' => 'The music link must be a valid YouTube URL.',
         ]);
 
         $music = Music::find($request->music_id);

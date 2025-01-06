@@ -1,0 +1,5 @@
+{
+    "extension": ["js", "jsx"],
+    "spec": "resources/js/Test/*.test.js",
+    "node-option": ["experimental-specifier-resolution=node"]
+}

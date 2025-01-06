@@ -39,7 +39,6 @@ function Dashboard({ user, musics }) {
             showCancelButton: true,
             confirmButtonText: 'Yes, delete it!',
             cancelButtonText: 'No, cancel!',
-            reverseButtons: true,
         }).then((result) => {
             if (result.isConfirmed) {
                 window.location.href = `/delete/music/${musicId}`;
@@ -60,27 +59,49 @@ function Dashboard({ user, musics }) {
 
     const getPreview = (link) => {
         if (!isValidLink(link)) return null;
-
+    
         // YouTube Preview
         if (link.includes("youtube.com") || link.includes("youtu.be")) {
             const videoId = link.split('v=')[1]?.split('&')[0] || link.split('/').pop();
+            const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+            const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+    
             return (
-                <iframe
-                    width="200" 
-                    height="113" 
-                    src={`https://www.youtube.com/embed/${videoId}`} 
-                    frameBorder="0" 
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-                    allowFullScreen 
-                    title="YouTube Video"
-                ></iframe>
+                <a
+                    href={videoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative block w-64 h-36 rounded-md overflow-hidden shadow-lg"
+                >
+                    {/* Thumbnail */}
+                    <img
+                        src={thumbnailUrl}
+                        alt="YouTube Thumbnail"
+                        className="absolute inset-0 w-full h-full object-cover group-hover:hidden"
+                    />
+    
+                    {/* iFrame (Visible on hover) */}
+                    <iframe
+                        className="absolute inset-0 w-full h-full hidden group-hover:block"
+                        src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        title="YouTube Video"
+                    ></iframe>
+    
+                    {/* Title and Play Info */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-75 text-white text-sm p-2">
+                        <h3 className="font-semibold truncate">Goodness Of God (LIVE) - Jenn Johnson</h3>
+                        <p className="text-xs text-gray-300">YouTube • 5:04</p>
+                    </div>
+                </a>
             );
         }
-
-        // You can add more preview types for other platforms (like Vimeo, etc.)
+    
         return <span className="text-gray-500">No preview available</span>;
     };
-
+    
     useEffect(() => {
         if (flash) {
             Swal.fire({

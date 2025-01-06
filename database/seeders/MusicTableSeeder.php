@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Music;
 
 class MusicTableSeeder extends Seeder
 {
@@ -12,28 +12,26 @@ class MusicTableSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('music')->insert([
+        $music = [
             [
-                'title' => 'Shape of You',
-                'artist' => 'Ed Sheeran',
-                'music_link' => 'https://example.com/shape-of-you',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'title' => 'Goodness of God',
+                'artist' => 'Jenn Johnson',
+                'music_link' => 'https://www.youtube.com/watch?v=n0FBb6hnwTo',
             ],
             [
-                'title' => 'Blinding Lights',
-                'artist' => 'The Weeknd',
-                'music_link' => 'https://example.com/blinding-lights',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'title' => 'Remembrance',
+                'artist' => 'Brooke Ligertwood',
+                'music_link' => 'https://www.youtube.com/watch?v=_Q_T5KU9QgY',
             ],
             [
-                'title' => 'Someone Like You',
-                'artist' => 'Adele',
-                'music_link' => 'https://example.com/someone-like-you',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'title' => 'Praise',
+                'artist' => 'Elevation Worship',
+                'music_link' => 'https://www.youtube.com/watch?v=f2oxGYpuLkw',
             ],
-        ]);
+        ];
+
+        foreach ($music as $song) {
+            Music::create($song);
+        }
     }
 }
